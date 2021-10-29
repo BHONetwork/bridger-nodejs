@@ -1,12 +1,8 @@
-# Node-Typescript-Boilerplate
+# Asset bridgers for Bholdus chain
 
-Skeleton for Node.js applications written in TypeScript
 
 ## Purpose
-
-Our main purpose with this Skeleton is to start server application with node js and typescript.
-
-Try it!! I am happy to hear your feedback or any kind of new features.
+Allow users to easily transfer assets between Bholdus chain and other blockchains.
 
 ## Common Features
 
@@ -40,7 +36,7 @@ Try it!! I am happy to hear your feedback or any kind of new features.
 
 ## Start The application in Development Mode
 
-- Clone the Application `git clone https://github.com/santoshshinde2012/node-boilerplate.git`
+- Clone the Application 
 - Install the dependencies `npm install`
 - Start the application `npm start`
 
@@ -68,9 +64,6 @@ Try it!! I am happy to hear your feedback or any kind of new features.
 | **tests/unit-tests/**             | Unit Test cases will be placed here  |
 | **tests/integration-tests/**      | API routes (Integration) Test cases will be placed here|
 
-## Workflow
-
-![Workflow](https://github.com/santoshshinde2012/node-boilerplate/blob/master/wiki/boilerplate-workflow.png?raw=true)
 
 ## Encryption
 
@@ -92,10 +85,6 @@ To access the `applyEncryption` attribute from `Envionment` class to Response Ha
 - `${host}/api/status/process` -  Return the process details in response
 - `${host}/api/status/error` - Return the error generated object in response
 
-## Refrences
-
-- [Skeleton for Node.js Apps written in TypeScript](https://javascript.plainenglish.io/skeleton-for-node-js-apps-written-in-typescript-444fa1695b30)
-- [Setup Eslint Prettier and Husky in Node JS Typescript Project](https://gist.github.com/santoshshinde2012/e1433327e5f7a58f98fe3e6651c4d5de)
 
 ## Notes
 
@@ -122,5 +111,3 @@ chmod ug+x .git/hooks/*
 
 
 <hr/>
-
-# Please connect with me on Twitter [@shindesan2012](https://twitter.com/shindesan2012) & [https://blog.santoshshinde.com](https://blog.santoshshinde.com/)
