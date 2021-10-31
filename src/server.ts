@@ -4,6 +4,8 @@ import { setGlobalEnvironment } from './global';
 import App from './App';
 import Environment from './environments/environment';
 import logger from './lib/logger';
+import { container } from '@di';
+import { BholdusBscTask } from '@tasks/task-bholdus-bsc';
 
 const env: Environment = new Environment();
 setGlobalEnvironment(env);
@@ -31,6 +33,12 @@ app.init()
 		server.on('error', serverError);
 		server.on('listening', serverListening);
 		server.listen(env.port);
+
+		const bholdusBscTask = container.get<BholdusBscTask>(
+			BholdusBscTask.symbol,
+		);
+
+		bholdusBscTask.start();
 	})
 	.catch((err: Error) => {
 		logger.info('app.init error');

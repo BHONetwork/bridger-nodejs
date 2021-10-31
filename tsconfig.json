@@ -10,13 +10,15 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "sourceMap": true,
+    "types": ["reflect-metadata"],
     "baseUrl": ".",
        "paths": {
            "*": [
-               "node_modules/*",
                "tests/*",
            ],
-           "@lib/task": ["src/lib/task"]
+           "@lib/*": ["src/lib/*"],
+           "@tasks/*": ["src/tasks/*"],
+           "@di": ["src/inversify.config.ts"]
      }
   },
   "include": [

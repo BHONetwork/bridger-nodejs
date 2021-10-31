@@ -1,23 +1,26 @@
 import { SubjectLike } from 'rxjs';
 
-export interface IMessage<EventBus> {}
-
-export interface IChannel<Message> {
-	subject: SubjectLike<Message>;
+export interface IMessageStatic<Bus> extends Type<IMessage<Bus>> {
+	channel(): SubjectLike<IMessage<Bus>>;
+	symbol: symbol;
 }
 
-export interface IChannelConstructor<Message> {
-	new (): IChannel<Message>;
-	symbol: Symbol;
-}
+export interface IMessage<Bus> {}
 
-export interface IMessageBus {
-	tx<
+export abstract class IMessageBus {
+	private _channels: Map<symbol, SubjectLike<IMessage<IMessageBus>>>;
+
+	channel<
 		MessageBus extends IMessageBus,
 		Message extends IMessage<MessageBus>,
-		ChannelConstructor extends IChannelConstructor<Message>,
-		Channel extends IChannel<Message>,
-	>(
-		constructor: ChannelConstructor,
-	): Channel;
+		MessageStatic extends IMessageStatic<MessageBus>,
+	>(constructor: MessageStatic): SubjectLike<Message> {
+		if (this._channels.has(constructor.symbol)) {
+			return this._channels.get(constructor.symbol);
+		}
+		const channel = constructor.channel();
+		this._channels.set(constructor.symbol, channel);
+
+		return channel;
+	}
 }
