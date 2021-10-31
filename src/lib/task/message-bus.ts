@@ -1,3 +1,4 @@
+import { injectable } from 'inversify';
 import { SubjectLike } from 'rxjs';
 
 export interface IMessageStatic<Bus> extends Type<IMessage<Bus>> {
@@ -7,6 +8,7 @@ export interface IMessageStatic<Bus> extends Type<IMessage<Bus>> {
 
 export interface IMessage<Bus> {}
 
+@injectable()
 export abstract class IMessageBus {
 	private _channels: Map<symbol, SubjectLike<IMessage<IMessageBus>>>;
 
