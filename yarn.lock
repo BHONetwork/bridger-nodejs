@@ -429,21 +429,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@bholdus/api-options@npm:^0.0.1-next.11":
-  version: 0.0.1-next.11
-  resolution: "@bholdus/api-options@npm:0.0.1-next.11"
+"@bholdus/api-options@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@bholdus/api-options@npm:0.0.1"
   dependencies:
     "@babel/runtime": ^7.16.0
-    "@bholdus/types": 0.0.1-next.11
+    "@bholdus/types": 0.0.1
     "@polkadot/api": ^6.5.2
-  checksum: 5c875a4f5e58c2899575470e5c158b20dd9a739ed7daf905fd25de87596b18ffced9f053e0c6d9043e1c9166480287887ed93568dacc07da78f89523ca46fb96
+  checksum: aea4d0613e4b0b9d646c0223e31cfc426d8efb0949abd768a7150dd04a6f4c2b65c8073c3aea13cb13471508a1e4ef6cd4fecfddf984d7e26dd59eb826b99b95
   languageName: node
   linkType: hard
 
-"@bholdus/types@npm:0.0.1-next.11, @bholdus/types@npm:^0.0.1-next.11":
-  version: 0.0.1-next.11
-  resolution: "@bholdus/types@npm:0.0.1-next.11"
-  checksum: e3ab700c3c5bf0676c28d39478a2f7f7ea1e897c82aa9070bd45f586a74e4a5ce1947a7033964297561eecb3124fd7fabd405ef9e4dcfea004bd6c4b6e125e1b
+"@bholdus/types@npm:0.0.1, @bholdus/types@npm:^0.0.1":
+  version: 0.0.1
+  resolution: "@bholdus/types@npm:0.0.1"
+  checksum: 57f68f91f32e63ef09cdf5b7aed1b979d01b29530a63acf2cb2999864fe9ab39b4bf48fe3cc71affa329ef86a6e4041d2e3d43810af1d450b60a93951c9d1527
   languageName: node
   linkType: hard
 
@@ -5685,8 +5685,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "node-typescript-boilerplate@workspace:."
   dependencies:
-    "@bholdus/api-options": ^0.0.1-next.11
-    "@bholdus/types": ^0.0.1-next.11
+    "@bholdus/api-options": ^0.0.1
+    "@bholdus/types": ^0.0.1
     "@polkadot/api": ^6.5.2
     "@types/cors": ^2.8.10
     "@types/express": ^4.17.12
