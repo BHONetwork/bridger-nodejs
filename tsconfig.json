@@ -3,7 +3,7 @@
     "lib": ["es2018"],
     "rootDirs": ["tests", "src"],
     "target": "es2018",
-    "module": "commonjs",
+    "module": "CommonJS",
     "moduleResolution": "node",
     "outDir": "./build",
     "skipLibCheck": true,
@@ -19,7 +19,7 @@
            "@lib/*": ["src/lib/*"],
            "@tasks/*": ["src/tasks/*"],
            "@di": ["src/inversify.config.ts"]
-     }
+     },
   },
   "include": [
     "src/**/*.ts",
