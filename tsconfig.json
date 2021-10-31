@@ -15,7 +15,8 @@
            "*": [
                "node_modules/*",
                "tests/*",
-           ]
+           ],
+           "@lib/task": ["src/lib/task"]
      }
   },
   "include": [
@@ -23,7 +24,7 @@
     ".env",
     ".env.*",
     "tests/**/*.ts",
-    "index.js",
+    "index.ts",
     "jest.config.js",
     "config/*.config.js" // for *.config.js files
   ],
