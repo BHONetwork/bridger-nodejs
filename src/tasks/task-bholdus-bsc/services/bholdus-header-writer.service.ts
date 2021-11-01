@@ -12,6 +12,5 @@ export class BholdusHeaderWriterService implements IService<BholdusBscTaskBus> {
 
 	async start(): Promise<void> {
 		const api = await ApiPromise.create(getApiOptions());
-	
 	}
 }
