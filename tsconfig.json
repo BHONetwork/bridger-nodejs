@@ -18,7 +18,8 @@
            ],
            "@lib/*": ["src/lib/*"],
            "@tasks/*": ["src/tasks/*"],
-           "@di": ["src/inversify.config.ts"]
+           "@di": ["src/inversify.config.ts"],
+           "@constant": ["src/constants"]
      },
   },
   "include": [

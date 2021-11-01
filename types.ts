@@ -5,3 +5,4 @@ interface Type<T> {
 function staticImplements<T>() {
 	return (constructor: T) => {};
 }
+
