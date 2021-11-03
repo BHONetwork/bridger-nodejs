@@ -26,11 +26,11 @@ export class BscHeaderListenerService implements IService<BholdusBscTaskBus> {
 
 		let blockNumber = Number(latestBlock.number.toBigInt());
 
+		const subject = this.bus.channel(BholdusWriterMessage);
+
 		while (true) {
 
 			blockNumber = blockNumber + BSC_CONFIG.epockLength;
-
-			const subject = this.bus.channel(BholdusWriterMessage);
 
 			let listBlock = [];
 
