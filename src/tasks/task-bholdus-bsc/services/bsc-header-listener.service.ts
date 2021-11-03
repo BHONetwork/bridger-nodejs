@@ -8,8 +8,7 @@ import { BholdusWriterMessage } from '../message'
 import { SubjectLike, Subject } from 'rxjs';
 import '@bholdus/types'
 import { BscPrimitivesBscHeader } from '@bholdus/types/interfaces'
-import { Bytes } from '@polkadot/types';
-
+import { BSC_CONFIG } from '@constant'
 
 @injectable()
 export class BscHeaderListenerService implements IService<BholdusBscTaskBus> {
@@ -25,28 +24,25 @@ export class BscHeaderListenerService implements IService<BholdusBscTaskBus> {
 
 		const latestBlock = await api.query.bsc.finalizedCheckpoint();
 
-		const blockNumber = Number(latestBlock.number.toBigInt() + BigInt("200"));
+		let blockNumber = Number(latestBlock.number.toBigInt());
 
-		let epockBlock = await this.getBlock(blockNumber, api, provider);
+		while (true) {
 
-		const subject = this.bus.channel(BholdusWriterMessage);
+			blockNumber = blockNumber + BSC_CONFIG.epockLength;
 
-		// console.log(epockBlock);
+			const subject = this.bus.channel(BholdusWriterMessage);
 
-		let listBlock = [epockBlock];
+			let listBlock = [];
 
-		for (let index = 1;index < (epockBlock.get("extraData").toU8a().length + 1)/2; index++) {
-			const block = await this.getBlock(blockNumber + index, api, provider);
-			listBlock.push(block);
+			for (let index = 0;index <= (BSC_CONFIG.numberOfValidators + 1)/2; index++) {
+				const block = await this.getBlock(blockNumber + index, api, provider);
+				listBlock.push(block);
+			}
+
+			let listBlockSubmit = api.createType("Vec<BscPrimitivesBscHeader>", listBlock);
+
+			subject.next(listBlockSubmit);
 		}
-
-		// console.log(listBlock.length);
-
-		let listBlockSubmit = api.createType("Vec<BscPrimitivesBscHeader>", listBlock);
-
-		// console.log(listBlockSubmit[1].get("number").toString());
-
-		subject.next(listBlockSubmit);
 
 	}
 
@@ -61,7 +57,7 @@ export class BscHeaderListenerService implements IService<BholdusBscTaskBus> {
 						api.createType("BscPrimitivesBscHeader", [
 							api.createType("H256", block.parentHash),
 							api.createType("H256", block.uncleHash),
-							api.createType("Address", block.coinbase),
+							api.createType("H160", block.coinbase),
 							api.createType("H256", block.stateRoot),
 							api.createType("H256", block.transactionsRoot),
 							api.createType("H256", block.receiptsRoot),
@@ -71,9 +67,9 @@ export class BscHeaderListenerService implements IService<BholdusBscTaskBus> {
 							api.createType("U256", block.gasLimit.toString()),
 							api.createType("U256", block.gasUsed.toString()),
 							api.createType("u64", block.timestamp),
-							api.createType("Bytes", block.extraData),
+							api.createType("Vec<u8>", block.extraData),
 							api.createType("H256", block.mixDigest),
-							api.createType("Bytes", block.nonce),
+							api.createType("Vec<u8>", block.nonce),
 						]);
 				return result;
 			}
