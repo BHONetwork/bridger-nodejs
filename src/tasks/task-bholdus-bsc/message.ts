@@ -4,9 +4,9 @@ import { Subject, SubjectLike } from 'rxjs';
 import { BholdusBscTaskBus } from './bus';
 
 @staticImplements<IMessageStatic<BholdusBscTaskBus>>()
-export class BholdusWriterMessage implements IMessage<BholdusBscTaskBus> {
-	static symbol = Symbol(BholdusWriterMessage.name);
-	static channel(): SubjectLike<BholdusWriterMessage> {
+export class BholdusWriterSubmitBscHeaderMessage implements IMessage<BholdusBscTaskBus> {
+	static symbol = Symbol(BholdusWriterSubmitBscHeaderMessage.name);
+	static channel(): SubjectLike<BholdusWriterSubmitBscHeaderMessage> {
 		return new Subject();
 	}
 }

@@ -4,11 +4,13 @@ import { BholdusBscTaskBus } from '../bus';
 import { ApiPromise, WsProvider } from '@polkadot/api';
 import getApiOptions from '@bholdus/api-options';
 import { ethers } from 'ethers';
-import { BholdusWriterMessage } from '../message'
+import { BholdusWriterSubmitBscHeaderMessage } from '../message'
 import { SubjectLike, Subject } from 'rxjs';
 import '@bholdus/types'
 import { BscPrimitivesBscHeader } from '@bholdus/types/interfaces'
 import { BSC_CONFIG } from '@constant'
+import '@lib/logger'
+import logger from '@lib/logger';
 
 @injectable()
 export class BscHeaderListenerService implements IService<BholdusBscTaskBus> {
@@ -22,11 +24,13 @@ export class BscHeaderListenerService implements IService<BholdusBscTaskBus> {
 		const wsProvider = new WsProvider("ws://127.0.0.1:9944");
 		const api = await ApiPromise.create(getApiOptions({ provider: wsProvider }));
 
+		logger.info(BscHeaderListenerService.name + " - Get finalized checkpoint");
+
 		const latestBlock = await api.query.bsc.finalizedCheckpoint();
 
 		let blockNumber = Number(latestBlock.number.toBigInt());
 
-		const subject = this.bus.channel(BholdusWriterMessage);
+		const subject = this.bus.channel(BholdusWriterSubmitBscHeaderMessage);
 
 		while (true) {
 
@@ -49,7 +53,7 @@ export class BscHeaderListenerService implements IService<BholdusBscTaskBus> {
 	async getBlock(blockNumber: number, api: ApiPromise, provider: ethers.providers.JsonRpcProvider): Promise<BscPrimitivesBscHeader> {
 		let block = null;
 		while (block == null) {
-			console.log("Get block: ", blockNumber);
+			logger.info(BscHeaderListenerService.name + " - Get BSC block: " + blockNumber);
 			block = await provider.getBlock(blockNumber);
 			if (block != null) {
 				
