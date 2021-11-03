@@ -17,7 +17,6 @@ export class BscHeaderListenerService implements IService<BholdusBscTaskBus> {
 	@inject(BholdusBscTaskBus.symbol) private bus: BholdusBscTaskBus;
 
 	async start(): Promise<void> {
-		// const subject = this.bus.channel(BholdusWriterMessage);
 		
 		const provider = new ethers.providers.JsonRpcProvider("https://bsc-dataseed1.binance.org:443");
 
@@ -30,7 +29,9 @@ export class BscHeaderListenerService implements IService<BholdusBscTaskBus> {
 
 		let epockBlock = await this.getBlock(blockNumber, api, provider);
 
-		console.log(epockBlock);
+		const subject = this.bus.channel(BholdusWriterMessage);
+
+		// console.log(epockBlock);
 
 		let listBlock = [epockBlock];
 
@@ -39,15 +40,13 @@ export class BscHeaderListenerService implements IService<BholdusBscTaskBus> {
 			listBlock.push(block);
 		}
 
-		console.log(listBlock.length);
+		// console.log(listBlock.length);
 
 		let listBlockSubmit = api.createType("Vec<BscPrimitivesBscHeader>", listBlock);
 
-		console.log(listBlockSubmit[1].get("number").toString());
+		// console.log(listBlockSubmit[1].get("number").toString());
 
-		// this.bus.channel(BholdusWriterMessage).next({next:(message:BholdusWriterMessage) =>{
-        //     listBlockSubmit
-        // }})
+		subject.next(listBlockSubmit);
 
 	}
 
