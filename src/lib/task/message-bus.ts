@@ -17,6 +17,9 @@ export abstract class IMessageBus {
 		Message extends IMessage<MessageBus>,
 		MessageStatic extends IMessageStatic<MessageBus>,
 	>(constructor: MessageStatic): SubjectLike<Message> {
+		if (!this._channels) {
+			this._channels = new Map<symbol, SubjectLike<IMessage<IMessageBus>>>();
+		}
 		if (this._channels.has(constructor.symbol)) {
 			return this._channels.get(constructor.symbol);
 		}
