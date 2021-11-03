@@ -19,10 +19,10 @@ export class BholdusHeaderWriterService implements IService<BholdusBscTaskBus> {
 		const api = await ApiPromise.create({ provider: wsProvider });
 
 		// Do something
-		console.log(api.genesisHash.toHex());
-		this.bus.channel(BholdusWriterMessage).subscribe({next:(message:BholdusWriterMessage) =>{
-			let req = api.tx.bsc.verifyAndUpdateAuthoritySetSigned
-			req.apply
+		this.bus.channel(BholdusWriterMessage).subscribe({next:(message: BscPrimitivesBscHeader[]) =>{
+			let req = api.tx.bsc.verifyAndUpdateAuthoritySetSigned(message)
+			console.log("Result writer: ", req)
+			console.log("Message headerbsc: ", message)
 		}})
 	}
 }
