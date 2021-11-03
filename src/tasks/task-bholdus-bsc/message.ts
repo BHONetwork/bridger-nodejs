@@ -1,4 +1,5 @@
 import { IMessageStatic, IMessage } from '@lib/task';
+import { staticImplements } from '@lib/static-implements';
 import { Subject, SubjectLike } from 'rxjs';
 import { BholdusBscTaskBus } from './bus';
 
